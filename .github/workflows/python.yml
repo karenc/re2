@@ -56,8 +56,10 @@ jobs:
           wget "https://releases.bazel.build/9.0.1/release/bazel-9.0.1-installer-linux-x86_64.sh"
           ls -l
           chmod +x ./bazel-9.0.1-installer-linux-x86_64.sh
-          ./bazel-9.0.1-installer-linux-x86_64.sh
+          ./bazel-9.0.1-installer-linux-x86_64.sh --user
           ls -l
+          echo $PATH
+          ls -l ~/bin/
           bazel
           "${PYTHON}" -m build --wheel || ls -l -R /github/home/.cache/bazelisk/downloads/ && exit 1
           "${PYTHON}" -m auditwheel repair --wheel-dir=. dist/*
