@@ -55,6 +55,7 @@ jobs:
         run: |
           wget "https://releases.bazel.build/9.0.1/release/bazel-9.0.1-linux-x86_64"
           ls -l
+          chmod +x ./bazel-9.0.1-linux-x86_64
           ./bazel-9.0.1-linux-x86_64
           "${PYTHON}" -m build --wheel || ls -l -R /github/home/.cache/bazelisk/downloads/ && exit 1
           "${PYTHON}" -m auditwheel repair --wheel-dir=. dist/*
