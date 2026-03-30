@@ -27,7 +27,7 @@ jobs:
         arch:
           - { name: X64,   python-name: x86_64,  runs-on: [ubuntu-latest]              }
           #- { name: ARM64, python-name: aarch64, runs-on: [ubuntu-24.04-arm] }
-        os: [musllinux_1_2, manylinux_2_28]
+        os: [musllinux_1_2] #, manylinux_2_28]
         ver: ['3.11']
     env:
       BAZELISK_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -53,6 +53,9 @@ jobs:
         env:
           SOURCE_DATE_EPOCH: ${{ env.timestamp }}
         run: |
+          wget "https://releases.bazel.build/9.0.1/release/bazel-9.0.1-linux-x86_64"
+          ls -l
+          ./bazel-9.0.1-linux-x86_64
           "${PYTHON}" -m build --wheel || ls -l -R /github/home/.cache/bazelisk/downloads/ && exit 1
           "${PYTHON}" -m auditwheel repair --wheel-dir=. dist/*
         shell: bash
